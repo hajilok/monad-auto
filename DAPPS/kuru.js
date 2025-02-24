@@ -1,4 +1,4 @@
-import wallet from "../wallet.js";
+import wallet from "../handle.js";
 
 export const kuruLite = async (px) => {
   const walletData = await wallet(px);

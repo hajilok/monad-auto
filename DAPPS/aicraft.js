@@ -1,5 +1,5 @@
 import axios from "axios";
-import wallet from "../wallet.js";
+import wallet from "../handle.js";
 
 const vote = async (px) => {
   const walletData = await wallet(px);

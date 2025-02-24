@@ -1,4 +1,4 @@
-import wallet from "../wallet.js";
+import wallet from "../handle.js";
 
 const deposit = async (px) => {
   const walletData = await wallet(px);

@@ -4,7 +4,11 @@ import fs from "fs/promises";
 import vote from "./DAPPS/aicraft.js";
 import deposit from "./DAPPS/apriori.js";
 import swapOnBebop from "./DAPPS/bebop.js";
-import { kuruLite } from "./DAPPS/kuru.js";
+import { swapMonadbean, swapUsdcbean } from "./DAPPS/beanExchange.js";
+import monorail from "./DAPPS/monorail.js";
+import kintzu from "./DAPPS/kintzu.js";
+import swaponRubic from "./DAPPS/rubic.js";
+import stakeOnmagma from "./DAPPS/magmastaking.js";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -51,9 +55,25 @@ const main = async () => {
         const swapMessage = await swapOnBebop(privateKey);
         console.log(chalk.green(swapMessage.wrapMessage));
         console.log(chalk.green(swapMessage.unwrapMessage));
-        console.log(chalk.yellow("Start Swap Monad to HOCHi on Kuru Lite"));
-        const kuruMessage = await kuruLite(privateKey);
-        console.log(chalk.green(kuruMessage));
+        console.log(chalk.yellow("Start Swap Monad to Usdc on Bean.exchange"));
+        const beanMessage = await swapMonadbean(privateKey);
+        const usdcbeanMessage = await swapUsdcbean(privateKey);
+        console.log(chalk.green(beanMessage));
+        console.log(chalk.green(usdcbeanMessage));
+        console.log(chalk.yellow("Start Swap Monad to Chog on monorail"));
+        const monorailMessage = await monorail(privateKey);
+        console.log(chalk.green(monorailMessage));
+        console.log(chalk.yellow("Start Stake and Unstake on Kintzu"));
+        const kintzuMessage = await kintzu(privateKey);
+        console.log(chalk.green(kintzuMessage.stakeMessage));
+        console.log(chalk.green(kintzuMessage.unstakeMessage));
+        console.log(chalk.yellow("Start Swap Monad To Usdt On Rubic"));
+        const rubicMessage = await swaponRubic(privateKey);
+        console.log(chalk.green(rubicMessage));
+        console.log(chalk.yellow("Start Stake Monad To MagmaStaking"));
+        const magmaStake = await stakeOnmagma(privateKey);
+        console.log(chalk.green(magmaStake.stakeMessage));
+        console.log(chalk.green(magmaStake.unstakeMessage));
       } catch (err) {
         console.log(err);
       }

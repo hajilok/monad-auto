@@ -1,0 +1,45 @@
+import wallet from "../handle.js";
+
+const swaponRubic = async (px) => {
+  const walletData = await wallet(px);
+  const data = `0xac9650d800000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001a0000000000000000000000000000000000000000000000000000000000000012475ceafe6000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000${walletData.account.address.replace(
+    /^0x/,
+    ""
+  )}000000000000000000000000000000000000000000000000016345785d8a0000000000000000000000000000000000000000000000000000002308ef69e84bd200000000000000000000000000000000000000000000000000000000ffffffff000000000000000000000000000000000000000000000000000000000000002b760afe86e5de5fa0ee542fc7b7b713e1c54257010007d06a7436775c0d0b70cff4c5365404ec37c9d9af4b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000412210e8a00000000000000000000000000000000000000000000000000000000`;
+  const contract = `0xF6FFe4f3FdC8BBb7F70FFD48e61f17D1e343dDfD`;
+
+  let gasEstimate;
+  try {
+    gasEstimate = await walletData.wallet.eth.estimateGas({
+      from: walletData.account.address,
+      to: contract,
+      value: walletData.wallet.utils.toWei("0.1", "ether"),
+      data: data,
+    });
+  } catch (error) {
+    console.error("Gas estimation failed:", error);
+    gasEstimate = 300000; // Fallback gas limit
+  }
+
+  const tx = {
+    from: walletData.account.address,
+    to: contract,
+    value: walletData.wallet.utils.toWei("0.1", "ether"),
+    data: data,
+    gas: gasEstimate,
+    gasPrice: await walletData.wallet.eth.getGasPrice(),
+  };
+
+  const signedTx = await walletData.account.signTransaction(
+    tx,
+    walletData.privateKey
+  );
+
+  const receipt = await walletData.wallet.eth.sendSignedTransaction(
+    signedTx.rawTransaction
+  );
+
+  return `Successfully Swap Monad To Usdt on Rubic: https://testnet.monadexplorer.com/tx/${receipt.logs[0].transactionHash}`;
+};
+
+export default swaponRubic;

@@ -2,7 +2,7 @@ import Web3 from "web3";
 import dotenv from "dotenv";
 dotenv.config();
 const wallet = async (px) => {
-  const web3 = new Web3("https://testnet-rpc.monad.xyz");
+  const web3 = new Web3("https://testnet-rpc.monad.xyz/");
   const privateKey = px;
   const formattedPrivateKey = privateKey.startsWith("0x")
     ? privateKey

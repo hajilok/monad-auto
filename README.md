@@ -9,10 +9,17 @@ Link Garapan : https://t.me/makmum/5146
 - udh itu aja 
 
 # List Ecosystem 
-- Kuru.io ( Swap Monad To Hochi )
-- Bebob
-- aicraft.fun
-- apr.io 
+- Bebob ( Wrap And Unwrap Monad )
+- aicraft.fun ( Voting On monad)
+- apr.io ( Staking )
+- Bean Exchange ( Swap Monad To Usdc )
+- Kintzu ( Stacking )
+- Magma Stacking
+- Rubic (Swap Monad To Usdt)
+- Monorail ( Swap Monad To chog )
+
+# Removed Ecosystem :
+- Kuru ( Reason : Got bug )
 
 Soon i will add another ecosystem , Join to my channel for information
 

@@ -24,8 +24,6 @@ const vote = async (px) => {
     }
   );
 
-  // console.log(getToken.data.data.token);
-
   const getMe = await axios.get("https://api.aicraft.fun/users/me", {
     headers: {
       Authorization: `Bearer ${getToken.data.data.token}`,
@@ -101,7 +99,27 @@ const vote = async (px) => {
   const receipt = await walletData.wallet.eth.sendSignedTransaction(
     signedTx.rawTransaction
   );
-  return `Vote Hash Successful on aicraft : https://testnet.monadexplorer.com/tx/${receipt.logs[0].transactionHash}`;
+
+  try {
+    const confirm = await axios.post(
+      `https://api.aicraft.fun/feeds/orders/${getAbi.data.data.order._id}/confirm`,
+      {
+        transactionHash: receipt.logs[0].transactionHash,
+        refCode: "Z9INWOZWAV",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${getToken.data.data.token}`,
+          Accept: "application/json",
+        },
+      }
+    );
+    if (confirm.data.data.status === "SUCCESS") {
+      return `Successfully Vote on Aicraft: https://testnet.monadexplorer.com/tx/${receipt.logs[0].transactionHash}`;
+    }
+  } catch (error) {
+    return `Failed To Vote`;
+  }
 };
 
 export default vote;

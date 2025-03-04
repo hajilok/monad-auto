@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import dotenv from "dotenv";
 dotenv.config();
 const wallet = async (px) => {
-  const rpcUrl = `https://testnet-rpc.monad.xyz/`;
+  const rpcUrl = `https://monad-testnet.g.alchemy.com/v2/nR72bxK2nIiUl42EDVpqbNDDTo0yyGDX`;
   const web3 = new Web3(rpcUrl);
   const privateKey = px;
   const formattedPrivateKey = privateKey.startsWith("0x")

@@ -9,6 +9,8 @@ import monorail from "./DAPPS/monorail.js";
 import kintzu from "./DAPPS/kintzu.js";
 import swaponRubic from "./DAPPS/rubic.js";
 import stakeOnmagma from "./DAPPS/magmastaking.js";
+import monadex from "./DAPPS/monadex/monadex.js";
+import shmonad from "./DAPPS/shmonad.js";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -74,6 +76,23 @@ const main = async () => {
         const magmaStake = await stakeOnmagma(privateKey);
         console.log(chalk.green(magmaStake.stakeMessage));
         console.log(chalk.green(magmaStake.unstakeMessage));
+        console.log(chalk.yellow("Start Stake Monad To Shmonad"));
+        const shmonadMessage = await shmonad(wallet[i]);
+        if (!shmonadMessage.error) {
+          console.log(chalk.green(shmonadMessage.messageStake));
+          console.log(chalk.green(shmonadMessage.messageCommitTo4337Paymaster));
+          console.log(chalk.green(shmonadMessage.messageCommitToTaskManager));
+        } else {
+          console.log(chalk.red(shmonadMessage.error));
+        }
+        console.log(
+          chalk.yellow(
+            "Start Swap Monad To Shmonad and add Liquidty wMonad And shMonad on Monadex"
+          )
+        );
+        const monadexMessage = await monadex(wallet[i]);
+        console.log(chalk.green(monadexMessage.message));
+        console.log(chalk.green(monadexMessage.liquidityMessage));
       } catch (err) {
         console.log(err);
       }

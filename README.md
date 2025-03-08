@@ -17,6 +17,8 @@ Link Garapan : https://t.me/makmum/5146
 - Magma Stacking
 - Rubic (Swap Monad To Usdt)
 - Monorail ( Swap Monad To chog )
+- shMonad ( stake and Commit shMonad )
+- Monadex ( Swap Monad to shMonad and Add Liquidty shMonad )
 
 # Removed Ecosystem :
 - Kuru ( Reason : Got bug )
